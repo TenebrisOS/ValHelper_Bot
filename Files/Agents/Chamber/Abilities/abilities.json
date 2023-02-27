@@ -1,0 +1,10 @@
+{
+    "ABILITIEONE" : "HEADHUNTER",
+    "ABILITIETWO" : "RENDEZVOUS",
+    "ABILITIETHREE" : "TRADEMARK",
+    "ABILITIEFOUR" : "TOURDEFORCE",
+    "HEADHUNTER" : "ACTIVATE to equip a heavy pistol. ALT FIRE with the pistol equipped to aim down sights",
+    "RENDEZVOUS" : "PLACE a teleport anchor. While on the ground and in range of the anchor, REACTIVATE to quickly teleport to the anchor. The anchor can be picked up to be REDEPLOYED." ,
+    "TRADEMARK" : "PLACE a trap that scans for enemies. When a visible enemy comes in range, the trap counts down and then destabilizes the terrain around them, creating a lingering field that slows players caught inside of it. The trap can be picked up to be REDEPLOYED." ,
+    "TOURDEFORCE" : "ACTIVATE to summon a powerful, custom sniper rifle that will kill an enemy with any direct hit. Killing an enemy creates a lingering field that slows players caught inside of it."
+}
