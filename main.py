@@ -59,7 +59,7 @@ async def on_message(message:discord.Message):
         mbd.add_field(name = abilitie1, value = ablt1_desc)
         mbd.add_field(name = abilitie2, value = ablt2_desc)
         mbd.add_field(name = abilitie3, value = ablt3_desc)
-        mbd.add_field(name = abilitie4, value = ablt4_desc)
+        mbd.add_field(name = "ULT : " + abilitie4, value = ablt4_desc)
         await message.channel.send(embed=mbd) 
 
 client.run(TOKEN)
