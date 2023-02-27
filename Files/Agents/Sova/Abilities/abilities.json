@@ -1,10 +1,10 @@
 {
-    "ABILITIEONE" : "NOVAPULSE",
-    "ABILITIETWO" : "NEBULA",
-    "ABILITIETHREE" : "GRAVITYWELL",
-    "ABILITIEFOUR" : "COSMICDIVIDE",
-    "NOVAPULSE" : "Place Stars in Astral Form (X) ACTIVATE a Star to detonate a Nova Pulse. The Nova Pulse charges briefly then strikes, concussing all players in its area.",
-    "NEBULA" : "Place Stars in Astral Form (X) ACTIVATE a Star to transform it into a Nebula (smoke). Use (F) on a Star to Dissipate it, returning the star to be placed in a new location after a delay. Dissipate briefly forms a fake Nebula at the Star’s location before returning." ,
-    "GRAVITYWELL" : "Place Stars in Astral Form (X) ACTIVATE a Star to form a Gravity Well. Players in the area are pulled toward the center before it explodes, making all players still trapped inside fragile." ,
-    "COSMICDIVIDE" : "ACTIVATE (X) to enter Astral Form where you can place Stars with PRIMARY FIRE. Stars can be reactivated later, transforming them into a Nova Pulse, Nebula, or Gravity Well. When Cosmic Divide is charged, use SECONDARY FIRE in Astral Form to begin aiming it, then PRIMARY FIRE to select two locations. An infinite Cosmic Divide connects the two points you select. Cosmic Divide blocks bullets and heavily dampens audio."
+    "ABILITIEONE" : "SHOCKBOLT",
+    "ABILITIETWO" : "RECONBOLT",
+    "ABILITIETHREE" : "OWLDRONE",
+    "ABILITIEFOUR" : "HUNTER’SFURY",
+    "SHOCKBOLT" : "EQUIP a bow with a shock bolt. FIRE to send the explosive forward, detonating upon collision and damaging players nearby. HOLD FIRE to extend the range of the projectile. ALTERNATE FIRE to add up to two bounces to this arrow",
+    "RECONBOLT" : "EQUIP a bow with a recon bolt. FIRE to send the recon bolt forward, activating upon collision and revealing the location of nearby enemies caught in the line of sight of the bolt. HOLD FIRE to extend the range of the projectile. ALTERNATE FIRE to add up to two bounces to this arrow" ,
+    "OWLDRONE" : "EQUIP an owl drone. FIRE to deploy and take control of movement of the drone. While in control of the drone, FIRE to shoot a marking dart. This dart will reveal the location of any player struck by the dart" ,
+    "HUNTER’SFURY" : "EQUIP a bow with three long-range wall-piercing energy blasts. FIRE to release an energy blast in a line in front of Sova, dealing damage and revealing the location of enemies caught in the line. This ability can be RE-USED up to two more times while the ability timer is active"
 }
