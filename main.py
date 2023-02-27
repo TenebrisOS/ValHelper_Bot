@@ -34,7 +34,9 @@ async def on_message(message:discord.Message):
         img = descr["IMG"]
         desc = descr["DESC"]
         role = descr["ROLE"]
-        file = discord.File('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + '/img.png', filename='img.png') 
+        with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Roles/data.json') as c:
+            rolesdata = json.load(c)
+        thbm = rolesdata[role]
         with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/Abilities/abilities.json") as d:
             abl = json.load(d)
         abilitie1 = abl["ABILITIEONE"]
@@ -50,6 +52,7 @@ async def on_message(message:discord.Message):
         ablt4_desc = abl[abilitie4]
         #abl4_img = 'C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/Abilities/" + abilitie4 + ".png"
         mbd = discord.Embed(title=args[1])
+        mbd.set_thumbnail(url= thbm)
         mbd.set_image(url= img)
         mbd.add_field(name = "Role", value = role)
         mbd.add_field(name = "Description", value = desc)
