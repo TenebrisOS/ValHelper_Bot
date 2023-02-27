@@ -1,0 +1,10 @@
+{
+    "ABILITIEONE" : "FLASHPOINT",
+    "ABILITIETWO" : "FAULTLINE",
+    "ABILITIETHREE" : "AFTERSHOCK",
+    "ABILITIEFOUR" : "ROLLINGTHUNDER",
+    "FLASHPOINT" : "EQUIP a blinding charge. FIRE the charge to set fast-acting burst through the wall. The charge detonates to blind all players looking at it.",
+    "FAULTLINE" : "EQUIP a seismic blast. HOLD FIRE to increase the distance. RELEASE to set off the quake, dazing all players in its zone and in a line up to the zone." ,
+    "AFTERSHOCK" : "EQUIP a fusion charge. FIRE the charge to set a slow-acting burst through the wall. The burst does heavy damage to anyone caught in its area." ,
+    "ROLLINGTHUNDER" : "EQUIP a seismic charge. FIRE to send a cascading quake through all terrain in a large cone. The quake dazes and knocks up anyone caught in it."
+}
