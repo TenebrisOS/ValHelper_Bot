@@ -1,10 +1,10 @@
 {
-    "ABILITIEONE" : "NOVAPULSE",
-    "ABILITIETWO" : "NEBULA",
-    "ABILITIETHREE" : "GRAVITYWELL",
-    "ABILITIEFOUR" : "COSMICDIVIDE",
-    "NOVAPULSE" : "Place Stars in Astral Form (X) ACTIVATE a Star to detonate a Nova Pulse. The Nova Pulse charges briefly then strikes, concussing all players in its area.",
-    "NEBULA" : "Place Stars in Astral Form (X) ACTIVATE a Star to transform it into a Nebula (smoke). Use (F) on a Star to Dissipate it, returning the star to be placed in a new location after a delay. Dissipate briefly forms a fake Nebula at the Star’s location before returning." ,
-    "GRAVITYWELL" : "Place Stars in Astral Form (X) ACTIVATE a Star to form a Gravity Well. Players in the area are pulled toward the center before it explodes, making all players still trapped inside fragile." ,
-    "COSMICDIVIDE" : "ACTIVATE (X) to enter Astral Form where you can place Stars with PRIMARY FIRE. Stars can be reactivated later, transforming them into a Nova Pulse, Nebula, or Gravity Well. When Cosmic Divide is charged, use SECONDARY FIRE in Astral Form to begin aiming it, then PRIMARY FIRE to select two locations. An infinite Cosmic Divide connects the two points you select. Cosmic Divide blocks bullets and heavily dampens audio."
+    "ABILITIEONE" : "CURVEBALL",
+    "ABILITIETWO" : "HOTHANDS",
+    "ABILITIETHREE" : "BLAZE",
+    "ABILITIEFOUR" : "RUNITBACK",
+    "CURVEBALL" : "EQUIP a flare orb that takes a curving path and detonates shortly after throwing. FIRE to curve the flare orb to the left, detonating and blinding any player who sees the orb. ALTERNATE FIRE to curve the flare orb to the right",
+    "HOTHANDS" : "EQUIP a fireball. FIRE to throw a fireball that explodes after a set amount of time or upon hitting the ground, creating a lingering fire zone that damages enemies" ,
+    "BLAZE" : "EQUIP a flame wall. FIRE to create a line of flame that moves forward, creating a wall of fire that blocks vision and damages players passing through it. HOLD FIRE to bend the wall in the direction of your crosshair" ,
+    "RUNITBACK" : "INSTANTLY place a marker at Phoenix’s location. While this ability is active, dying or allowing the timer to expire will end this ability and bring Phoenix back to this location with full health"
 }
