@@ -1,0 +1,10 @@
+{
+    "ABILITIEONE" : "FLASH",
+    "ABILITIETWO" : "ZEROPOINT",
+    "ABILITIETHREE" : "FRAGMENT",
+    "ABILITIEFOUR" : "NULLCMD",
+    "FLASH" : "EQUIP a flash grenade. FIRE to throw. The flash grenade explodes after a short fuse, blinding anyone in line of sight",
+    "ZEROPOINT" : "EQUIP a suppression blade. FIRE to throw. The blade sticks to the first surface it hits, winds up, and suppresses anyone in the radius of the explosion" ,
+    "FRAGMENT" : "FRAG/MENT." ,
+    "NULLCMD" : "INSTANTLY overload with polarized radianite energy that empowers KAY/O and causes large energy pulses to emit from his location. Enemies hit with these pulses are suppressed for a short duration."
+}
