@@ -1,0 +1,10 @@
+{
+    "ABILITIEONE" : "HIGHTIDE",
+    "ABILITIETWO" : "COVE ",
+    "ABILITIETHREE" : "CASCADE ",
+    "ABILITIEFOUR" : "COSMICDIVIDE",
+    "HIGHTIDE" : "EQUIP a wall of water. FIRE to send the water forward along the ground. HOLD FIRE to guide the water in the direction of your crosshair, passing through the world, spawning a wall along the water’s path. ALT FIRE while bending to stop the water early. Players hit are SLOWED.",
+    "COVE" : "EQUIP a sphere of shielding water. FIRE to throw. ALT FIRE to underhand throw. Upon impacting the ground, spawn a destructible water shield that blocks bullets" ,
+    "CASCADE" : "EQUIP a wave of water. FIRE to send the wave rolling forward and through walls. RE- USE to stop the wave. Players hit are SLOWED." ,
+    "RECKONING" : "EQUIP the full power of your Artifact. FIRE to summon a geyser pool on the ground. Enemy players in the area are targeted by successive geyser strikes. Players caught within a strike are CONCUSSED."
+}
