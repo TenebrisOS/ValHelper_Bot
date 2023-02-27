@@ -1,10 +1,10 @@
 {
-    "ABILITIEONE" : "NOVAPULSE",
-    "ABILITIETWO" : "NEBULA",
-    "ABILITIETHREE" : "GRAVITYWELL",
-    "ABILITIEFOUR" : "COSMICDIVIDE",
-    "NOVAPULSE" : "Place Stars in Astral Form (X) ACTIVATE a Star to detonate a Nova Pulse. The Nova Pulse charges briefly then strikes, concussing all players in its area.",
-    "NEBULA" : "Place Stars in Astral Form (X) ACTIVATE a Star to transform it into a Nebula (smoke). Use (F) on a Star to Dissipate it, returning the star to be placed in a new location after a delay. Dissipate briefly forms a fake Nebula at the Star’s location before returning." ,
-    "GRAVITYWELL" : "Place Stars in Astral Form (X) ACTIVATE a Star to form a Gravity Well. Players in the area are pulled toward the center before it explodes, making all players still trapped inside fragile." ,
-    "COSMICDIVIDE" : "ACTIVATE (X) to enter Astral Form where you can place Stars with PRIMARY FIRE. Stars can be reactivated later, transforming them into a Nova Pulse, Nebula, or Gravity Well. When Cosmic Divide is charged, use SECONDARY FIRE in Astral Form to begin aiming it, then PRIMARY FIRE to select two locations. An infinite Cosmic Divide connects the two points you select. Cosmic Divide blocks bullets and heavily dampens audio."
+    "ABILITIEONE" : "RELAYBOLT",
+    "ABILITIETWO" : "HIGHGEAR",
+    "ABILITIETHREE" : "FASTLANE",
+    "ABILITIEFOUR" : "OVERDRIVE",
+    "RELAYBOLT" : "INSTANTLY throw an energy bolt that bounces once. Upon hitting each surface, the bolt electrifies the ground below with a concussive blast",
+    "HIGHGEAR" : "INSTANTLY channel Neon’s power for increased speed. When charged, ALT FIRE to trigger an electric slide. Slide charge resets every two kills" ,
+    "FASTLANE" : "FIRE two energy lines forward on the ground that extend a short distance or until they hit a surface. The lines rise into walls of static electricity that block vision and damage enemies passing through them.." ,
+    "OVERDRIVE" : "Unleash Neon’s full power and speed for a short duration. FIRE to channel the power into a deadly lightning beam with high movement accuracy. The duration resets on each kill"
 }
