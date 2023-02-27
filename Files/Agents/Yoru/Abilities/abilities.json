@@ -1,7 +1,7 @@
 {
     "ABILITIEONE" : "BLINDSIDE",
     "ABILITIETWO" : "GATECRASH",
-    "ABILITIETHREE" : "GRAVITYWELL",
+    "ABILITIETHREE" : "FAKEOUT",
     "ABILITIEFOUR" : "DIMENSIONALDRIFT",
     "BLINDSIDE" : "EQUIP to rip an unstable dimensional fragment from reality. FIRE to throw the fragment, activating a flash that winds up once it collides with a hard surface in world",
     "GATECRASH" : "EQUIP a rift tether FIRE to send the tether forward ALT FIRE to place a stationary tether ACTIVATE to teleport to the tether's location USE to trigger a fake teleport" ,
