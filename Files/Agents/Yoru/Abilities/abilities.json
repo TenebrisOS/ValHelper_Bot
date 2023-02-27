@@ -1,10 +1,10 @@
 {
-    "ABILITIEONE" : "NOVAPULSE",
-    "ABILITIETWO" : "NEBULA",
+    "ABILITIEONE" : "BLINDSIDE",
+    "ABILITIETWO" : "GATECRASH",
     "ABILITIETHREE" : "GRAVITYWELL",
-    "ABILITIEFOUR" : "COSMICDIVIDE",
-    "NOVAPULSE" : "Place Stars in Astral Form (X) ACTIVATE a Star to detonate a Nova Pulse. The Nova Pulse charges briefly then strikes, concussing all players in its area.",
-    "NEBULA" : "Place Stars in Astral Form (X) ACTIVATE a Star to transform it into a Nebula (smoke). Use (F) on a Star to Dissipate it, returning the star to be placed in a new location after a delay. Dissipate briefly forms a fake Nebula at the Star’s location before returning." ,
-    "GRAVITYWELL" : "Place Stars in Astral Form (X) ACTIVATE a Star to form a Gravity Well. Players in the area are pulled toward the center before it explodes, making all players still trapped inside fragile." ,
-    "COSMICDIVIDE" : "ACTIVATE (X) to enter Astral Form where you can place Stars with PRIMARY FIRE. Stars can be reactivated later, transforming them into a Nova Pulse, Nebula, or Gravity Well. When Cosmic Divide is charged, use SECONDARY FIRE in Astral Form to begin aiming it, then PRIMARY FIRE to select two locations. An infinite Cosmic Divide connects the two points you select. Cosmic Divide blocks bullets and heavily dampens audio."
+    "ABILITIEFOUR" : "DIMENSIONALDRIFT",
+    "BLINDSIDE" : "EQUIP to rip an unstable dimensional fragment from reality. FIRE to throw the fragment, activating a flash that winds up once it collides with a hard surface in world",
+    "GATECRASH" : "EQUIP a rift tether FIRE to send the tether forward ALT FIRE to place a stationary tether ACTIVATE to teleport to the tether's location USE to trigger a fake teleport" ,
+    "FAKEOUT" : "EQUIP an echo that transforms into a mirror image of Yoru when activated FIRE to instantly activate the mirror image and send it forward ALT FIRE to place an inactive echo USE to transform an inactive echo into a mirror image and send it forward. Mirror images explode in a blinding flash when destroyed by enemies." ,
+    "DIMENSIONALDRIFT" : "EQUIP a mask that can see between dimensions. FIRE to drift into Yoru's dimension, unable to be affected or seen by enemies from the outside"
 }
