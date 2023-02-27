@@ -2,6 +2,7 @@ import discord
 import time
 import json
 import io
+import asyncio
 import os
 
 with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/config.json') as f:
@@ -12,5 +13,50 @@ TOKEN = data["TOKEN"]
 intents = discord.Intents.all()
 intents.message_content = True
 client = discord.Client(intents=intents)
-PREFIX = "§"
-#endregion
+PREFIX = ":"
+#endregion 
+
+@client.event
+async def on_ready():
+    print(f'{client.user} has connected to Discord!')
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Riot Games Patches :)"))
+
+@client.event
+async def on_message(message:discord.Message):
+    if message.author.bot or not(str(message.content).startswith(PREFIX)):
+        return
+    args = message.content.split(" ")
+    args[0] = args[0][1::]
+    print(args[0])
+    if args[0] == "Agent" :
+        with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/desc.json") as d:
+            descr = json.load(d)
+        img = descr["IMG"]
+        desc = descr["DESC"]
+        role = descr["ROLE"]
+        file = discord.File('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + '/img.png', filename='img.png') 
+        with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/Abilities/abilities.json") as d:
+            abl = json.load(d)
+        abilitie1 = abl["ABILITIEONE"]
+        ablt1_desc = abl[abilitie1]
+        #abl1_img = 'C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/Abilities/" + abilitie1 + ".png"
+        abilitie2 = abl["ABILITIETWO"]
+        ablt2_desc = abl[abilitie2]
+        #abl2_img = 'C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/Abilities/" + abilitie2 + ".png"
+        abilitie3 = abl["ABILITIETHREE"]
+        ablt3_desc = abl[abilitie3]
+        #abl3_img = 'C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/Abilities/" + abilitie3 + ".png"
+        abilitie4 = abl["ABILITIEFOUR"]
+        ablt4_desc = abl[abilitie4]
+        #abl4_img = 'C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/Abilities/" + abilitie4 + ".png"
+        mbd = discord.Embed(title=args[1])
+        mbd.set_image(url= img)
+        mbd.add_field(name = "Role", value = role)
+        mbd.add_field(name = "Description", value = desc)
+        mbd.add_field(name = abilitie1, value = ablt1_desc)
+        mbd.add_field(name = abilitie2, value = ablt2_desc)
+        mbd.add_field(name = abilitie3, value = ablt3_desc)
+        mbd.add_field(name = abilitie4, value = ablt4_desc)
+        await message.channel.send(embed=mbd) 
+
+client.run(TOKEN)
