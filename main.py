@@ -61,5 +61,9 @@ async def on_message(message:discord.Message):
         mbd.add_field(name = abilitie3, value = ablt3_desc)
         mbd.add_field(name = "ULT : " + abilitie4, value = ablt4_desc)
         await message.channel.send(embed=mbd) 
+    
+    if args[0] == "Map" :
+        with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/desc.json") as d:
+            descr = json.load(d)
 
 client.run(TOKEN)
