@@ -64,9 +64,18 @@ async def on_message(message:discord.Message):
         await message.channel.send(embed=mbd) 
     
     if args[0] == "Map" :
-        with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/desc.json") as d:
-            descr = json.load(d)
-
+        with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Maps/'+ args[2] + "/data.json") as x:
+            descr2 = json.load(x)
+        graph = descr2["GRAPH"]
+        desc2 = descr2["DESC"]
+        persp = descr2["PERSP"]
+        mbd2 = discord.Embed(title=args[1])
+        mbd2.add_field(name = "Description", value = desc2)
+        if args[1] == "Graph" :
+            mbd2.set_image(url= graph)
+        if args[1] == "Persp" :
+            mbd2.set_image(url= persp)
+        
     if args[0] == "Last-Update" :
         await message.channel.send("Last Update : " + LASTUPDATE)
 
