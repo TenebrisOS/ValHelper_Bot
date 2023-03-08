@@ -14,6 +14,7 @@ intents = discord.Intents.all()
 intents.message_content = True
 client = discord.Client(intents=intents)
 PREFIX = ":"
+LASTUPDATE = "EP_06 // ACT II"
 #endregion 
 
 @client.event
@@ -65,5 +66,8 @@ async def on_message(message:discord.Message):
     if args[0] == "Map" :
         with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/desc.json") as d:
             descr = json.load(d)
+
+    if args[0] == "Last-Update" :
+        await message.channel.send("Last Update : " + LASTUPDATE)
 
 client.run(TOKEN)
