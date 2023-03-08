@@ -2,6 +2,7 @@ import discord
 import time
 import json
 import io
+from discord import app_commands
 import asyncio
 import os
 
@@ -81,6 +82,11 @@ async def on_message(message:discord.Message):
         await message.channel.send("Last Update : " + LASTUPDATE)
     
     if args[0] == "Help" :
-        mbdhelp = discord.Embed(title=args[1])
+        mbdhelp = discord.Embed(title="Help")
+        mbdhelp.add_field(name = "Prefix", value = "` : `")
+        mbdhelp.add_field(name = "Informations About Agents :)", value = "Get any information / description / abilities, etc about an agent. Usage : `<Prefix> Agent <Agent Name>`")
+        mbdhelp.add_field(name = "\\ \\ Maps :)", value = "Get infos about any map. Usage : `<Prefix> Graph \ Persp <Map>`")
+        mbdhelp.add_field(name = "Help :)", value = "Get this page. Usage `<Prefix> Help`")
+        await message.channel.send(embed=mbdhelp)
 
 client.run(TOKEN)
