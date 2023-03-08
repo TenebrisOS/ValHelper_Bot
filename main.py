@@ -75,6 +75,7 @@ async def on_message(message:discord.Message):
             mbd2.set_image(url= graph)
         if args[1] == "Persp" :
             mbd2.set_image(url= persp)
+        await message.channel.send(embed=mbd2) 
         
     if args[0] == "Last-Update" :
         await message.channel.send("Last Update : " + LASTUPDATE)
