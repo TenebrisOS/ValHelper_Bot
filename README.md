@@ -3,4 +3,4 @@ This is a discord bot made with python that can help you in valorant with a high
 All data about valorant are taken from https://playvalorant.com/en-us/agents/
 ## Commands And Usage
 - Prefix before every command ":"
-- Show any agent informations / abilities / role / etc... ``` Agent <agent_name> ```
+- Show any agent informations / abilities / role / etc... Usage : ``` Agent <agent_name> ```
