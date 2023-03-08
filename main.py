@@ -14,9 +14,16 @@ TOKEN = data["TOKEN"]
 intents = discord.Intents.all()
 intents.message_content = True
 client = discord.Client(intents=intents)
+tree = app_commands.CommandTree(client)
 PREFIX = ":"
 LASTUPDATE = "EP_06 // ACT II"
 #endregion 
+
+mbdhelp = discord.Embed(title="Help")
+mbdhelp.add_field(name = "Prefix", value = "` : `")
+mbdhelp.add_field(name = "Informations About Agents :)", value = "Get any information / description / abilities, etc about an agent. Usage : `<Prefix> Agent <Agent Name>`")
+mbdhelp.add_field(name = "\\ \\ Maps :)", value = "Get infos about any map. Usage : `<Prefix> Graph \ Persp <Map>`")
+mbdhelp.add_field(name = "Help :)", value = "Get this page. Usage `<Prefix> Help`")
 
 @client.event
 async def on_ready():
@@ -82,11 +89,10 @@ async def on_message(message:discord.Message):
         await message.channel.send("Last Update : " + LASTUPDATE)
     
     if args[0] == "Help" :
-        mbdhelp = discord.Embed(title="Help")
-        mbdhelp.add_field(name = "Prefix", value = "` : `")
-        mbdhelp.add_field(name = "Informations About Agents :)", value = "Get any information / description / abilities, etc about an agent. Usage : `<Prefix> Agent <Agent Name>`")
-        mbdhelp.add_field(name = "\\ \\ Maps :)", value = "Get infos about any map. Usage : `<Prefix> Graph \ Persp <Map>`")
-        mbdhelp.add_field(name = "Help :)", value = "Get this page. Usage `<Prefix> Help`")
         await message.channel.send(embed=mbdhelp)
+
+@tree.command(name = "help", description = "Get usage help :)", guild=discord.Object(id=1079717093689278514)) #Add the guild ids in which the slash command will appear. If it should be in all, remove the argument, but note that it will take some time (up to an hour) to register the command if it's for all guilds.
+async def first_command(interaction):
+    await interaction.channel.send(embed=mbdhelp)
 
 client.run(TOKEN)
