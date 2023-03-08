@@ -79,5 +79,8 @@ async def on_message(message:discord.Message):
         
     if args[0] == "Last-Update" :
         await message.channel.send("Last Update : " + LASTUPDATE)
+    
+    if args[0] == "Help" :
+        mbdhelp = discord.Embed(title=args[1])
 
 client.run(TOKEN)
