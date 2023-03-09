@@ -3,6 +3,7 @@ import time
 import json
 import io
 from discord import app_commands
+from discord.ext import commands
 import asyncio
 import os
 
@@ -14,9 +15,11 @@ TOKEN = data["TOKEN"]
 intents = discord.Intents.all()
 intents.message_content = True
 client = discord.Client(intents=intents)
-tree = app_commands.CommandTree(client)
+#tree = app_commands.CommandTree(client)
 PREFIX = ":"
 LASTUPDATE = "EP_06 // ACT II"
+bot = discord.Bot()
+botGuilds = ""
 #endregion 
 
 mbdhelp = discord.Embed(title="Help")
@@ -91,8 +94,12 @@ async def on_message(message:discord.Message):
     if args[0] == "Help" :
         await message.channel.send(embed=mbdhelp)
 
-@tree.command(name = "help", description = "Get usage help :)", guild=discord.Object(id=1079717093689278514)) #Add the guild ids in which the slash command will appear. If it should be in all, remove the argument, but note that it will take some time (up to an hour) to register the command if it's for all guilds.
-async def first_command(interaction):
-    await interaction.channel.send(embed=mbdhelp)
+#@tree.command(name = "help", description = "Get usage help :)", guild=discord.Object(id=1079717093689278514)) #Add the guild ids in which the slash command will appear. If it should be in all, remove the argument, but note that it will take some time (up to an hour) to register the command if it's for all guilds.
+#async def first_command(interaction):
+#    await interaction.channel.send(embed=mbdhelp)
+
+bot.slash_command(guild_ids=botGuilds)
+async def help(message) :
+    await message.channel.send(embed=mbdhelp)
 
 client.run(TOKEN)
