@@ -2,9 +2,9 @@ import discord
 import time
 import json
 import io
-#from discord import app_commands
+from discord import app_commands
 from discord.ext import commands
-from discord_slash import SlashCommand, SlashContext
+#from discord_slash import commands, SlashCommand, SlashContext
 import asyncio
 import os
 
@@ -16,12 +16,10 @@ TOKEN = data["TOKEN"]
 intents = discord.Intents.all()
 intents.message_content = True
 client = discord.Client(intents=intents)
-#tree = app_commands.CommandTree(client)
+tree = app_commands.CommandTree(client)
 PREFIX = ":"
-bot = discord.Bot()
-slash = SlashCommand(bot)
 LASTUPDATE = "EP_06 // ACT II"
-botGuilds = "859761829345361930", "786255946535796761", "949319579077869628"
+#slash = SlashCommand(client, sync_commands = True)
 #endregion 
 
 mbdhelp = discord.Embed(title="Help")
@@ -34,7 +32,7 @@ mbdhelp.add_field(name = "Help :)", value = "Get this page. Usage `<Prefix> Help
 async def on_ready():
     print(f'{client.user} has connected to Discord!')
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Riot Games Patches :)"))
-
+    
 @client.event
 async def on_message(message:discord.Message):
     if message.author.bot or not(str(message.content).startswith(PREFIX)):
@@ -100,9 +98,8 @@ async def on_message(message:discord.Message):
 #async def first_command(interaction):
 #    await interaction.channel.send(embed=mbdhelp)
 
-@slash.slash(name="test")
-async def _test(ctx: SlashContext):
-    embed = discord.Embed(title="embed test")
-    await ctx.send(content="test", embeds=[embed])
+#@slash.slash(name="help", description= "Get usage help and other stuff", guild_ids="786255946535796759")
+#async def help(message):
+#    await message.channel.send(embed=mbdhelp)
 
 client.run(TOKEN)
