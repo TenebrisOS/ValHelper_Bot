@@ -2,8 +2,9 @@ import discord
 import time
 import json
 import io
-from discord import app_commands
+#from discord import app_commands
 from discord.ext import commands
+from discord_slash import SlashCommand, SlashContext
 import asyncio
 import os
 
@@ -17,9 +18,10 @@ intents.message_content = True
 client = discord.Client(intents=intents)
 #tree = app_commands.CommandTree(client)
 PREFIX = ":"
-LASTUPDATE = "EP_06 // ACT II"
 bot = discord.Bot()
-botGuilds = ""
+slash = SlashCommand(bot)
+LASTUPDATE = "EP_06 // ACT II"
+botGuilds = "859761829345361930", "786255946535796761", "949319579077869628"
 #endregion 
 
 mbdhelp = discord.Embed(title="Help")
@@ -98,8 +100,9 @@ async def on_message(message:discord.Message):
 #async def first_command(interaction):
 #    await interaction.channel.send(embed=mbdhelp)
 
-bot.slash_command(guild_ids=botGuilds)
-async def help(message) :
-    await message.channel.send(embed=mbdhelp)
+@slash.slash(name="test")
+async def _test(ctx: SlashContext):
+    embed = discord.Embed(title="embed test")
+    await ctx.send(content="test", embeds=[embed])
 
 client.run(TOKEN)
