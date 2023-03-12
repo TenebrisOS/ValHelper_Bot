@@ -11,6 +11,7 @@ import selenium
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.chrome.options import Options
 import os
 
 with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/config.json') as f:
@@ -25,16 +26,25 @@ client = discord.Client(intents=intents)
 #tree = app_commands.CommandTree(client)
 PREFIX = ":"
 LASTUPDATE = "EP_06 // ACT II"
-driver = webdriver.Chrome()
+options = Options()
+driver = webdriver.Chrome(options=options)
 #slash = SlashCommand(client, sync_commands = True)
 #endregion 
 
 def GetStats(args) :
     CORRECTEDargs = str(args).replace('#', '%23')
     driver.get('https://tracker.gg/valorant/profile/riot/' + CORRECTEDargs + '/overview')
-    #currentRank = driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[1]/div[1]/div[1]/div/div/div/div/div[2]/div[2]/text()')
-    mbd_stats = discord.Embed(title=args)
-    #mbdstats.addfield(name = 'Current Rank :', value = currentRank)
+    driver.execute_script("""
+   var l = document.getElementsByXPATH("//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[1]/div[1]/div[1]/div/div/div/div/div[2]/div[2]/comment()[1]")[0];
+   l.parentNode.removeChild(l);
+""")
+    driver.execute_script("""
+   var l = document.getElementsByXPATH("//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[1]/div[1]/div[1]/div/div/div/div/div[2]/div[2]/comment()[2];
+   l.parentNode.removeChild(l);
+""")
+    currentRank = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[1]/div[1]/div[1]/div/div/div/div/div[2]/div[2]/text()'))
+    mbd_stats = discord.Embed(title=args + "Ranked Stats :")
+    mbd_stats.add_field(name = 'Current Rank :', value = currentRank.text)
     winRate = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[3]/div[4]/div/div[2]/span[2]'))
     mbd_stats.add_field(name = 'Winrate :', value = winRate.text)
     hsPourc = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[3]/div[3]/div/div[2]/span[2]')
@@ -44,7 +54,6 @@ def GetStats(args) :
     driver.get('https://tracker.gg/valorant/profile/riot/' + CORRECTEDargs + '/performance')
     playTime = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[1]/div[1]/div/div[1]/div[2]'))
     mbd_stats.add_field(name = 'Playtime :', value = playTime.text)
-    driver.close()
     return mbd_stats
 
 mbdhelp = discord.Embed(title="Help")
