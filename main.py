@@ -3,9 +3,14 @@ import time
 import json
 import io
 from discord import app_commands
+import interactions
 from discord.ext import commands
 #from discord_slash import commands, SlashCommand, SlashContext
 import asyncio
+import selenium
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
 import os
 
 with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/config.json') as f:
@@ -15,12 +20,32 @@ with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/config.json') as f:
 TOKEN = data["TOKEN"]
 intents = discord.Intents.all()
 intents.message_content = True
+bot = interactions.Client(token = TOKEN)
 client = discord.Client(intents=intents)
-tree = app_commands.CommandTree(client)
+#tree = app_commands.CommandTree(client)
 PREFIX = ":"
 LASTUPDATE = "EP_06 // ACT II"
+driver = webdriver.Chrome()
 #slash = SlashCommand(client, sync_commands = True)
 #endregion 
+
+def GetStats(args) :
+    CORRECTEDargs = str(args).replace('#', '%23')
+    driver.get('https://tracker.gg/valorant/profile/riot/' + CORRECTEDargs + '/overview')
+    #currentRank = driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[1]/div[1]/div[1]/div/div/div/div/div[2]/div[2]/text()')
+    mbd_stats = discord.Embed(title=args)
+    #mbdstats.addfield(name = 'Current Rank :', value = currentRank)
+    winRate = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[3]/div[4]/div/div[2]/span[2]'))
+    mbd_stats.add_field(name = 'Winrate :', value = winRate.text)
+    hsPourc = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[3]/div[3]/div/div[2]/span[2]')
+    mbd_stats.add_field(name = 'HS / % :', value = hsPourc.text)
+    KDRatio = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[3]/div[2]/div/div[2]/span[2]')
+    mbd_stats.add_field(name = 'HD Ratio :', value = KDRatio.text)
+    driver.get('https://tracker.gg/valorant/profile/riot/' + CORRECTEDargs + '/performance')
+    playTime = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[1]/div[1]/div/div[1]/div[2]'))
+    mbd_stats.add_field(name = 'Playtime :', value = playTime.text)
+    driver.close()
+    return mbd_stats
 
 mbdhelp = discord.Embed(title="Help")
 mbdhelp.add_field(name = "Prefix", value = "` : `")
@@ -33,6 +58,10 @@ async def on_ready():
     print(f'{client.user} has connected to Discord!')
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Riot Games Patches :)"))
     
+@bot.command(name="help", description="Get Usage help for commands :D", scope=786255946535796759)
+async def help(ctx: interactions.CommandContext):
+    await interactions.channel.send(embed=mbdhelp)
+
 @client.event
 async def on_message(message:discord.Message):
     if message.author.bot or not(str(message.content).startswith(PREFIX)):
@@ -93,6 +122,10 @@ async def on_message(message:discord.Message):
     
     if args[0] == "Help" :
         await message.channel.send(embed=mbdhelp)
+
+    if args[0] == 'Stats' :
+        mbdstats = GetStats(args=args[1])
+        await message.channel.send(embed=mbdstats)
 
 #@tree.command(name = "help", description = "Get usage help :)", guild=discord.Object(id=1079717093689278514)) #Add the guild ids in which the slash command will appear. If it should be in all, remove the argument, but note that it will take some time (up to an hour) to register the command if it's for all guilds.
 #async def first_command(interaction):
