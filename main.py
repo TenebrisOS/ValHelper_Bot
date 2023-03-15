@@ -11,6 +11,8 @@ import selenium
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+from pyvirtualdisplay import Display 
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
 #from discord_slash.utils.manage_components import create_button, create_actionrow
 #from discord_slash.model import ButtonStyle
@@ -21,15 +23,19 @@ with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/config.json') as f:
    data = json.load(f)
 
 # region variables 
+#display = Display(visible=0, size=(800, 600))
+#display.start()
 TOKEN = data["TOKEN"]
 intents = discord.Intents.all()
 intents.message_content = True
 bot = interactions.Client(token = TOKEN)
 client = discord.Client(intents=intents)
+profileIsPrivate = bool
 #tree = app_commands.CommandTree(client)
 PREFIX = ":"
 LASTUPDATE = "EP_06 // ACT II"
 options = Options()
+#options.add_argument("--headless")
 driver = webdriver.Chrome(options=options)
 #slash = SlashCommand(client, sync_commands = True)
 #endregion 
@@ -37,7 +43,13 @@ driver = webdriver.Chrome(options=options)
 def GetStats(args) :
     CORRECTEDargs = str(args).replace('#', '%23')
     driver.get('https://tracker.gg/valorant/profile/riot/' + CORRECTEDargs + '/overview')
-    #driver.execute_script("""
+    time.sleep(1)
+    try:
+        if driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/span') :
+            profileIsPrivate = True
+    
+    except NoSuchElementException:
+        #driver.execute_script("""
    #var l = document.getElementsByXPATH("//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[1]/div[1]/div[1]/div/div/div/div/div[2]/div[2]/comment()[1]")[0];
    #l.parentNode.removeChild(l);
 #""")
@@ -46,39 +58,41 @@ def GetStats(args) :
    #l.parentNode.removeChild(l);
 #""")
     #currentRank = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[1]/div[1]/div[1]/div/div/div/div/div[2]/div[2]/text()'))
-    mbd_stats = discord.Embed(title=" Ranked Stats :", color = Color.red())
-    #mbd_stats.add_field(name = 'Current Rank :', value = currentRank.text)
-    time.sleep(1)
-    winRate = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[3]/div[4]/div/div[2]/span[2]'))
-    mbd_stats.add_field(name = 'Winrate :', value = winRate.text)
-    hsPourc = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[3]/div[3]/div/div[2]/span[2]')
-    mbd_stats.add_field(name = 'HS / % :', value = hsPourc.text)
-    KDRatio = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[3]/div[2]/div/div[2]/span[2]')
-    rankImg = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[2]/div[2]/div/div[1]/img')
-    imgUrl = rankImg.get_attribute("src")
-    mbd_stats.set_thumbnail(url= imgUrl)
-    mbd_stats.add_field(name = 'HD Ratio :', value = KDRatio.text)
-    #aces = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[5]/div[12]/div/div[1]/span[2]'))
-    driver.get('https://tracker.gg/valorant/profile/riot/' + CORRECTEDargs + '/performance')
-    playTime = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[1]/div[1]/div/div[1]/div[2]'))
-    mbd_stats.add_field(name = 'Playtime :', value = playTime.text)
-    driver.get('https://tracker.gg/valorant/profile/riot/' + CORRECTEDargs + '/agents?playlist=unrated')
-    mainAgent = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[1]'))
-    agent = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div/div[2]/div/div[1]/div[1]/div[1]/img')
-    #agentIMG = agent.get_attribute("src")
-    mbd_stats.add_field(name = 'Main Agent :', value = mainAgent.text)
-    #mbd_stats.set_image(url= agentIMG)
-    mbd_stats.set_author(name= args)
-    mbd_stats.set_footer(text= "All informations are from https://tracker.gg/valorant")
+        mbd_stats = discord.Embed(title=" Ranked Stats :", color = Color.red())
+        #mbd_stats.add_field(name = 'Current Rank :', value = currentRank.text)
+        time.sleep(1)
+        winRate = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[3]/div[4]/div/div[2]/span[2]'))
+        mbd_stats.add_field(name = 'Winrate :', value = winRate.text)
+        hsPourc = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[3]/div[3]/div/div[2]/span[2]')
+        mbd_stats.add_field(name = 'HS / % :', value = hsPourc.text)
+        KDRatio = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[3]/div[2]/div/div[2]/span[2]')
+        rankImg = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[2]/div[2]/div/div[1]/img')
+        imgUrl = rankImg.get_attribute("src")
+        mbd_stats.set_thumbnail(url= imgUrl)
+        mbd_stats.add_field(name = 'HD Ratio :', value = KDRatio.text)
+        #aces = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[5]/div[12]/div/div[1]/span[2]'))
+        driver.get('https://tracker.gg/valorant/profile/riot/' + CORRECTEDargs + '/performance')
+        playTime = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[1]/div[1]/div/div[1]/div[2]'))
+        mbd_stats.add_field(name = 'Playtime :', value = playTime.text)
+        driver.get('https://tracker.gg/valorant/profile/riot/' + CORRECTEDargs + '/agents?playlist=unrated&season=all')
+        mainAgent = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[1]'))
+        agent = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div/div[2]/div/div[1]/div[1]/div[1]/img')
+        #agentIMG = agent.get_attribute("src")
+        mbd_stats.add_field(name = 'Main Agent :', value = mainAgent.text)
+        #mbd_stats.set_image(url= agentIMG)
+        mbd_stats.set_author(name= args)
+        mbd_stats.set_footer(text= "All informations are from https://tracker.gg/valorant")
+        return mbd_stats
     
     #mbd_stats.add_field(name = 'Aces :', value = aces.text)
-    return mbd_stats
+        
 
 mbdhelp = discord.Embed(title="Help")
 mbdhelp.add_field(name = "Prefix", value = "` : `")
 mbdhelp.add_field(name = "Informations About Agents :)", value = "Get any information / description / abilities, etc about an agent. Usage : `<Prefix> Agent <Agent Name>`")
 mbdhelp.add_field(name = "\\ \\ Maps :)", value = "Get infos about any map. Usage : `<Prefix> Graph \ Persp <Map>`")
 mbdhelp.add_field(name = "Help :)", value = "Get this page. Usage `<Prefix> Help`")
+mbdhelp.add_field(name = "Stats", value = "Get your ranked stats. Usage `<Prefix> Stats <yourfullname>`")
 
 @client.event
 async def on_ready():
@@ -152,8 +166,12 @@ async def on_message(message:discord.Message):
 
     if args[0] == 'Stats' :
         await message.channel.send('Hang on while we searching for : ' + args[1])
+        profileIsPrivate = False
         mbdstats = GetStats(args=args[1])
-        await message.channel.send(embed=mbdstats)
+        if profileIsPrivate == True :
+            await message.channel.send('Error 1, if you wanna know the meaning of the error, feel free to ask the OWNER :)')
+        else :
+            await message.channel.send(embed=mbdstats)
 
 #@tree.command(name = "help", description = "Get usage help :)", guild=discord.Object(id=1079717093689278514)) #Add the guild ids in which the slash command will appear. If it should be in all, remove the argument, but note that it will take some time (up to an hour) to register the command if it's for all guilds.
 #async def first_command(interaction):
