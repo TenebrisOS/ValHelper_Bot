@@ -2,9 +2,9 @@ import discord
 import time
 import json
 import io
-from discord import app_commands
+#from discord import app_commands
 import interactions
-from discord.ext import commands
+#from discord.ext import commands
 #from discord_slash import commands, SlashCommand, SlashContext
 import asyncio
 import selenium
@@ -14,6 +14,9 @@ from selenium.webdriver.support.wait import WebDriverWait
 from pyvirtualdisplay import Display 
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
+from discord import ButtonStyle, ActionRow, Button
+from discord import SlashCommand
+#from discord import create_button, create_actionrow
 #from discord_slash.utils.manage_components import create_button, create_actionrow
 #from discord_slash.model import ButtonStyle
 import os
@@ -30,7 +33,6 @@ intents = discord.Intents.all()
 intents.message_content = True
 bot = interactions.Client(token = TOKEN)
 client = discord.Client(intents=intents)
-profileIsPrivate = bool
 #tree = app_commands.CommandTree(client)
 PREFIX = ":"
 LASTUPDATE = "EP_06 // ACT II"
@@ -42,13 +44,21 @@ driver = webdriver.Chrome(options=options)
 
 def GetStats(args) :
     CORRECTEDargs = str(args).replace('#', '%23')
-    driver.get('https://tracker.gg/valorant/profile/riot/' + CORRECTEDargs + '/overview')
+    driver.get('https://tracker.gg/valorant/profile/riot/' + CORRECTEDargs + '/overview?playlist=competitive&season=all')
     time.sleep(1)
     try:
         if driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/span') :
-            profileIsPrivate = True
-    
+            print('private sTATS')
+            privateStats = True
+            return privateStats
+
     except NoSuchElementException:
+        privateStats = False
+        #components = [ActionRow(interactions.Button(url=('https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
+        #                           label="This is an Link",
+        #                           style=ButtonStyle.url,
+        #                          emoji='🎬'))
+        #]
         #driver.execute_script("""
    #var l = document.getElementsByXPATH("//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[1]/div[1]/div[1]/div/div/div/div/div[2]/div[2]/comment()[1]")[0];
    #l.parentNode.removeChild(l);
@@ -82,7 +92,8 @@ def GetStats(args) :
         #mbd_stats.set_image(url= agentIMG)
         mbd_stats.set_author(name= args)
         mbd_stats.set_footer(text= "All informations are from https://tracker.gg/valorant")
-        return mbd_stats
+        return mbd_stats 
+    #return components
     
     #mbd_stats.add_field(name = 'Aces :', value = aces.text)
         
@@ -166,12 +177,11 @@ async def on_message(message:discord.Message):
 
     if args[0] == 'Stats' :
         await message.channel.send('Hang on while we searching for : ' + args[1])
-        profileIsPrivate = False
         mbdstats = GetStats(args=args[1])
-        if profileIsPrivate == True :
-            await message.channel.send('Error 1, if you wanna know the meaning of the error, feel free to ask the OWNER :)')
+        if mbdstats == True :
+            await message.channel.send('Error 69, if you wanna know the meaning of the error, feel free to ask the OWNER :)')
         else :
-            await message.channel.send(embed=mbdstats)
+            await message.channel.send(embed=mbdstats) #components=mbdstats)
 
 #@tree.command(name = "help", description = "Get usage help :)", guild=discord.Object(id=1079717093689278514)) #Add the guild ids in which the slash command will appear. If it should be in all, remove the argument, but note that it will take some time (up to an hour) to register the command if it's for all guilds.
 #async def first_command(interaction):
