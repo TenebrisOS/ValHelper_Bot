@@ -49,11 +49,13 @@ def GetStats(args, ) :
     try:
         if driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/span') :
             print('private sTATS')
-            privateStats = True
-            return privateStats
+            StatsError = True
+            return StatsError
 
     except NoSuchElementException:
-        privateStats = False
+        StatsError = False
+        try :
+            rankImg = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[2]/div[2]/div/div[1]/img')
         #components = [ActionRow(interactions.Button(url=('https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
         #                           label="This is an Link",
         #                           style=ButtonStyle.url,
@@ -68,39 +70,41 @@ def GetStats(args, ) :
    #l.parentNode.removeChild(l);
 #""")
     #currentRank = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[1]/div[1]/div[1]/div/div/div/div/div[2]/div[2]/text()'))
-        mbd_stats = discord.Embed(title=" Ranked Stats :", color = Color.red())
-        #mbd_stats.add_field(name = 'Current Rank :', value = currentRank.text)
-        time.sleep(1)
-        winRate = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[3]/div[4]/div/div[2]/span[2]'))
-        mbd_stats.add_field(name = 'Winrate :', value = winRate.text)
-        hsPourc = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[3]/div[3]/div/div[2]/span[2]')
-        mbd_stats.add_field(name = 'HS / % :', value = hsPourc.text)
-        KDRatio = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[3]/div[2]/div/div[2]/span[2]')
-        rankImg = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[2]/div[2]/div/div[1]/img')
-        imgUrl = rankImg.get_attribute("src")
-        mbd_stats.set_thumbnail(url= imgUrl)
-        mbd_stats.add_field(name = 'HD Ratio :', value = KDRatio.text)
-        #aces = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[5]/div[12]/div/div[1]/span[2]'))
-        driver.get('https://tracker.gg/valorant/profile/riot/' + CORRECTEDargs + '/performance')
-        playTime = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[1]/div[1]/div/div[1]/div[2]'))
-        mbd_stats.add_field(name = 'Playtime :', value = playTime.text)
-        driver.get('https://tracker.gg/valorant/profile/riot/' + CORRECTEDargs + '/agents?playlist=unrated&season=all')
-        mainAgent = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[1]'))
-        mbd_stats.add_field(name = 'Main Agent :', value = mainAgent.text)
-        #agent = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div/div[2]/div/div[1]/div[1]/div[1]/img')
-        #agentIMG = agent.get_attribute("src")
-        driver.get('https://tracker.gg/valorant/profile/riot/' + CORRECTEDargs + '/overview?playlist=unrated&season=all')
-        topMap = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[1]/div[3]/div/div[2]/div[1]'))
-        mbd_stats.add_field(name = 'Top Map :', value = topMap.text)
-        driver.get('https://tracker.gg/valorant/profile/riot/' + CORRECTEDargs + '/matches?playlist=unrated&season=all')
-        #topFriend = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[1]/div[2]/div/div[1]/div[1]/div[1]/a/text()'))
-        
-        
-        #mbd_stats.add_field(name = 'Favorite Teamate :', value = topFriend.text)
-        #mbd_stats.set_image(url= agentIMG)
-        mbd_stats.set_author(name= args)
-        mbd_stats.set_footer(text= "All informations are from https://tracker.gg/valorant")
-        return mbd_stats 
+            mbd_stats = discord.Embed(title=" Ranked Stats :", color = Color.red())
+            #mbd_stats.add_field(name = 'Current Rank :', value = currentRank.text)
+            time.sleep(1)
+            winRate = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[3]/div[4]/div/div[2]/span[2]'))
+            mbd_stats.add_field(name = 'Winrate :', value = winRate.text)
+            hsPourc = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[3]/div[3]/div/div[2]/span[2]')
+            mbd_stats.add_field(name = 'HS / % :', value = hsPourc.text)
+            KDRatio = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[3]/div[2]/div/div[2]/span[2]')
+            rankImg = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[2]/div[2]/div/div[1]/img')
+            imgUrl = rankImg.get_attribute("src")
+            mbd_stats.set_thumbnail(url= imgUrl)
+            mbd_stats.add_field(name = 'HD Ratio :', value = KDRatio.text)
+            #aces = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[5]/div[12]/div/div[1]/span[2]'))
+            driver.get('https://tracker.gg/valorant/profile/riot/' + CORRECTEDargs + '/performance')
+            playTime = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[1]/div[1]/div/div[1]/div[2]'))
+            mbd_stats.add_field(name = 'Playtime :', value = playTime.text)
+            driver.get('https://tracker.gg/valorant/profile/riot/' + CORRECTEDargs + '/agents?playlist=unrated&season=all')
+            mainAgent = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[1]'))
+            mbd_stats.add_field(name = 'Main Agent :', value = mainAgent.text)
+            #agent = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div/div[2]/div/div[1]/div[1]/div[1]/img')
+            #agentIMG = agent.get_attribute("src")
+            driver.get('https://tracker.gg/valorant/profile/riot/' + CORRECTEDargs + '/overview?playlist=unrated&season=all')
+            topMap = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[1]/div[3]/div/div[2]/div[1]'))
+            mbd_stats.add_field(name = 'Top Map :', value = topMap.text)
+            driver.get('https://tracker.gg/valorant/profile/riot/' + CORRECTEDargs + '/matches?playlist=unrated&season=all')
+            #topFriend = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[1]/div[2]/div/div[1]/div[1]/div[1]/a/text()')) 
+            #mbd_stats.add_field(name = 'Favorite Teamate :', value = topFriend.text)
+            #mbd_stats.set_image(url= agentIMG)
+            mbd_stats.set_author(name= args)
+            mbd_stats.set_footer(text= "All informations are taken from https://tracker.gg/valorant")
+            return mbd_stats
+
+        except NoSuchElementException :
+            NoRanked = True
+            return NoRanked
     #return components
     
     #mbd_stats.add_field(name = 'Aces :', value = aces.text)
