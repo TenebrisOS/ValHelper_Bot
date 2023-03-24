@@ -56,6 +56,7 @@ def GetStats(args, ) :
         StatsError = False
         try :
             rankImg = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[2]/div[2]/div/div[1]/img')
+            NoRanked = "rank"
         #components = [ActionRow(interactions.Button(url=('https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
         #                           label="This is an Link",
         #                           style=ButtonStyle.url,
@@ -103,7 +104,7 @@ def GetStats(args, ) :
             return mbd_stats
 
         except NoSuchElementException :
-            NoRanked = True
+            NoRanked = "norank"
             return NoRanked
     #return components
     
@@ -192,6 +193,8 @@ async def on_message(message:discord.Message):
         mbdstats = GetStats(args=args[1])
         if mbdstats == True :
             await message.channel.send('Error 69, if you wanna know the meaning of the error, feel free to ask the OWNER :)')
+        if mbdstats == "norank" :
+            await message.channel.send('You have never played ranked before :(')
         else :
             await message.channel.send(embed=mbdstats) #components=mbdstats)
 
