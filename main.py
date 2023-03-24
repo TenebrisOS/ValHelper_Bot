@@ -42,7 +42,7 @@ driver = webdriver.Chrome(options=options)
 #slash = SlashCommand(client, sync_commands = True)
 #endregion 
 
-def GetStats(args) :
+def GetStats(args, ) :
     CORRECTEDargs = str(args).replace('#', '%23')
     driver.get('https://tracker.gg/valorant/profile/riot/' + CORRECTEDargs + '/overview?playlist=competitive&season=all')
     time.sleep(1)
