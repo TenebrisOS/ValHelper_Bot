@@ -55,6 +55,7 @@ def GetStats(args, ) :
     except NoSuchElementException:
         StatsError = False
         try :
+            
             rankImg = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[2]/div[2]/div/div[1]/img')
             NoRanked = "rank"
         #components = [ActionRow(interactions.Button(url=('https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
@@ -101,6 +102,7 @@ def GetStats(args, ) :
             #mbd_stats.set_image(url= agentIMG)
             mbd_stats.set_author(name= args)
             mbd_stats.set_footer(text= "All informations are taken from https://tracker.gg/valorant")
+            #driver.close()
             return mbd_stats
 
         except NoSuchElementException :
@@ -192,7 +194,7 @@ async def on_message(message:discord.Message):
         await message.channel.send('Hang on while we searching for : ' + args[1])
         mbdstats = GetStats(args=args[1])
         if mbdstats == True :
-            await message.channel.send('Error 69, if you wanna know the meaning of the error, feel free to ask the OWNER :)')
+            await message.channel.send('Your profile is private :(')
         if mbdstats == "norank" :
             await message.channel.send('You have never played ranked before :(')
         else :
