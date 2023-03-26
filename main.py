@@ -14,13 +14,11 @@ from selenium.webdriver.support.wait import WebDriverWait
 from pyvirtualdisplay import Display 
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
-from discord import ButtonStyle, ActionRow, Button
-from discord import SlashCommand
-#from discord import create_button, create_actionrow
-#from discord_slash.utils.manage_components import create_button, create_actionrow
-#from discord_slash.model import ButtonStyle
+#from discord import ButtonStyle, ActionRow, Button
+#from discord import SlashCommand
 import os
-from discord import Color
+from discord.ext import commands
+from discord import Color 
 
 with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/config.json') as f:
    data = json.load(f)
@@ -31,10 +29,11 @@ with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/config.json') as f:
 TOKEN = data["TOKEN"]
 intents = discord.Intents.all()
 intents.message_content = True
-bot = interactions.Client(token = TOKEN)
+scope = data["SCOPE"]
 client = discord.Client(intents=intents)
 #tree = app_commands.CommandTree(client)
 PREFIX = ":"
+bot = commands.Bot(command_prefix=PREFIX, intents=intents)
 LASTUPDATE = "EP_06 // ACT II"
 options = Options()
 #options.add_argument("--headless")
@@ -116,18 +115,18 @@ def GetStats(args, ) :
 mbdhelp = discord.Embed(title="Help")
 mbdhelp.add_field(name = "Prefix", value = "` : `")
 mbdhelp.add_field(name = "Informations About Agents :)", value = "Get any information / description / abilities, etc about an agent. Usage : `<Prefix> Agent <Agent Name>`")
-mbdhelp.add_field(name = "\\ \\ Maps :)", value = "Get infos about any map. Usage : `<Prefix> Graph \ Persp <Map>`")
+mbdhelp.add_field(name = "Informations About Maps :)", value = "Get infos about any map. Usage : `<Prefix> Graph \ Persp <Map>`")
 mbdhelp.add_field(name = "Help :)", value = "Get this page. Usage `<Prefix> Help`")
-mbdhelp.add_field(name = "Stats", value = "Get your ranked stats. Usage `<Prefix> Stats <yourfullname>`")
+mbdhelp.add_field(name = "Stats :)", value = "Get your ranked stats. Usage `<Prefix> Stats <yourfullname>`")
 
 @client.event
 async def on_ready():
     print(f'{client.user} has connected to Discord!')
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Riot Games Patches :)"))
     
-@bot.command(name="help", description="Get Usage help for commands :D", scope=786255946535796759)
-async def help(ctx: interactions.CommandContext):
-    await interactions.channel.send(embed=mbdhelp)
+@bot.command(name="gethelp", description="Get Usage help for commands :D", scope=scope)
+async def help(interaction: discord.Interaction):
+    await interactions.send(embed=mbdhelp)
 
 @client.event
 async def on_message(message:discord.Message):
@@ -200,12 +199,8 @@ async def on_message(message:discord.Message):
         else :
             await message.channel.send(embed=mbdstats) #components=mbdstats)
 
-#@tree.command(name = "help", description = "Get usage help :)", guild=discord.Object(id=1079717093689278514)) #Add the guild ids in which the slash command will appear. If it should be in all, remove the argument, but note that it will take some time (up to an hour) to register the command if it's for all guilds.
-#async def first_command(interaction):
-#    await interaction.channel.send(embed=mbdhelp)
-
-#@slash.slash(name="help", description= "Get usage help and other stuff", guild_ids="786255946535796759")
-#async def help(message):
-#    await message.channel.send(embed=mbdhelp)
+#@bot.slash_command(name ="helpDd", description="Get commands and usage help :D", scope= scope)
+#async def help(interaction: discord.Interaction):
+#    await interaction.channel.send(embed=mbdhelp, ephemeral=True)
 
 client.run(TOKEN)
