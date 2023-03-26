@@ -199,7 +199,7 @@ async def on_message(message:discord.Message):
                     url='https://tracker.gg/valorant/profile/riot/' + argsCOR,
                     )
             action_row = ActionRow(buttonUrl)
-            await message.channel.send('Your profile is private :(, or you have never logged in with tracker.gg, try :', components=[act])
+            await message.channel.send('Your profile is private :(, or you have never logged in with tracker.gg, try :', components=[action_row])
             
         if mbdstats == "norank" :
             await message.channel.send('You have never played ranked before :(')
