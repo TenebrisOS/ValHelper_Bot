@@ -14,7 +14,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from pyvirtualdisplay import Display 
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
-#from discord import ButtonStyle, ActionRow, Button
+from discord import ButtonStyle, ActionRow, Button
 #from discord import SlashCommand
 import os
 from discord.ext import commands
@@ -54,7 +54,6 @@ def GetStats(args, ) :
     except NoSuchElementException:
         StatsError = False
         try :
-            
             rankImg = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[2]/div[2]/div/div[1]/img')
             NoRanked = "rank"
         #components = [ActionRow(interactions.Button(url=('https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
@@ -124,9 +123,9 @@ async def on_ready():
     print(f'{client.user} has connected to Discord!')
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Riot Games Patches :)"))
     
-@bot.command(name="gethelp", description="Get Usage help for commands :D", scope=scope)
-async def help(interaction: discord.Interaction):
-    await interactions.send(embed=mbdhelp)
+#@bot.command(name="gethelp", description="Get Usage help for commands :D", scope=scope)
+#async def help(interaction: discord.Interaction):
+#    await interactions.send(embed=mbdhelp)
 
 @client.event
 async def on_message(message:discord.Message):
@@ -192,12 +191,27 @@ async def on_message(message:discord.Message):
     if args[0] == 'Stats' :
         await message.channel.send('Hang on while we searching for : ' + args[1])
         mbdstats = GetStats(args=args[1])
+        argsCOR = str(args[1]).replace('#', '%23')
         if mbdstats == True :
-            await message.channel.send('Your profile is private :(')
+            buttonUrl = Button(
+                    style=ButtonStyle.url,
+                    label="Sign in",
+                    url='https://tracker.gg/valorant/profile/riot/' + argsCOR,
+                    )
+            action_row = ActionRow(buttonUrl)
+            await message.channel.send('Your profile is private :(, or you have never logged in with tracker.gg, try :', components=[act])
+            
         if mbdstats == "norank" :
             await message.channel.send('You have never played ranked before :(')
+            #await message.channel.send('Sign in here to get your stats and use this bot : https://tracker.gg/valorant/profile/riot/' + argsCOR)
         else :
-            await message.channel.send(embed=mbdstats) #components=mbdstats)
+            buttonUrlG = Button(
+                    style=ButtonStyle.url,
+                    label="Check more Details :D",
+                    url='https://tracker.gg/valorant/profile/riot/' + argsCOR,
+                    )
+            action_row2 = ActionRow(buttonUrlG)
+            await message.channel.send(embed=mbdstats, components=[action_row2]) #components=mbdstats)
 
 #@bot.slash_command(name ="helpDd", description="Get commands and usage help :D", scope= scope)
 #async def help(interaction: discord.Interaction):
