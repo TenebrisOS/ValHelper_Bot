@@ -41,7 +41,7 @@ driver = webdriver.Chrome(options=options)
 #slash = SlashCommand(client, sync_commands = True)
 #endregion 
 
-def GetStats(args, ) :
+def GetStats(args) :
     CORRECTEDargs = str(args).replace('#', '%23')
     driver.get('https://tracker.gg/valorant/profile/riot/' + CORRECTEDargs + '/overview?playlist=competitive&season=all')
     time.sleep(1)
@@ -133,7 +133,7 @@ async def on_message(message:discord.Message):
         return
     args = message.content.split(" ")
     args[0] = args[0][1::]
-    print(args[0])
+    print(args)
     if args[0] == "Agent" :
         with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/desc.json") as d:
             descr = json.load(d)
