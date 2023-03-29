@@ -14,8 +14,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from pyvirtualdisplay import Display 
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
-from discord import ButtonStyle, ActionRow, Button
-#from discord import SlashCommand
+from discord import ButtonStyle, ActionRow, Button, SlashCommand
 import os
 from discord.ext import commands
 from discord import Color 
@@ -40,6 +39,20 @@ options = Options()
 driver = webdriver.Chrome(options=options)
 #slash = SlashCommand(client, sync_commands = True)
 #endregion 
+
+def GetMap(args1, args2):
+    with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Maps/'+ args2 + "/data.json") as x:
+            descr2 = json.load(x)
+    graph = descr2["GRAPH"]
+    desc2 = descr2["DESC"]
+    persp = descr2["PERSP"]
+    mbd2 = discord.Embed(title=args2)
+    mbd2.add_field(name = "Description", value = desc2)
+    if args1 == "Graph" :
+        mbd2.set_image(url= graph)
+    if args1 == "Persp" :
+        mbd2.set_image(url= persp)
+    return mbd2
 
 def GetStats(args) :
     CORRECTEDargs = str(args).replace('#', '%23')
@@ -108,15 +121,50 @@ def GetStats(args) :
             return NoRanked
     #return components
     
-    #mbd_stats.add_field(name = 'Aces :', value = aces.text)
-        
+    #mbd_stats.add_field(name = 'Aces :', value = aces.text)  
 
-mbdhelp = discord.Embed(title="Help")
-mbdhelp.add_field(name = "Prefix", value = "` : `")
-mbdhelp.add_field(name = "Informations About Agents :)", value = "Get any information / description / abilities, etc about an agent. Usage : `<Prefix> Agent <Agent Name>`")
-mbdhelp.add_field(name = "Informations About Maps :)", value = "Get infos about any map. Usage : `<Prefix> Graph \ Persp <Map>`")
-mbdhelp.add_field(name = "Help :)", value = "Get this page. Usage `<Prefix> Help`")
-mbdhelp.add_field(name = "Stats :)", value = "Get your ranked stats. Usage `<Prefix> Stats <yourfullname>`")
+def GetHelp():
+    mbdhelp = discord.Embed(title="Help")
+    mbdhelp.add_field(name = "Prefix", value = "` : `")
+    mbdhelp.add_field(name = "Informations About Agents :)", value = "Get any information / description / abilities, etc about an agent. Usage : `<Prefix> Agent <Agent Name>`")
+    mbdhelp.add_field(name = "Informations About Maps :)", value = "Get infos about any map. Usage : `<Prefix> Graph \ Persp <Map>`")
+    mbdhelp.add_field(name = "Help :)", value = "Get this page. Usage `<Prefix> Help`")
+    mbdhelp.add_field(name = "Stats :)", value = "Get your ranked stats. Usage `<Prefix> Stats <yourfullname>`")
+    return mbdhelp
+
+def GetAgent(args1):
+    with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args1 + "/desc.json") as d:
+            descr = json.load(d)
+    img = descr["IMG"]
+    desc = descr["DESC"]
+    role = descr["ROLE"]
+    with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Roles/data.json') as c:
+        rolesdata = json.load(c)
+    thbm = rolesdata[role]
+    with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args1 + "/Abilities/abilities.json") as d:
+        abl = json.load(d)
+    abilitie1 = abl["ABILITIEONE"]
+    ablt1_desc = abl[abilitie1]
+    #abl1_img = 'C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/Abilities/" + abilitie1 + ".png"
+    abilitie2 = abl["ABILITIETWO"]
+    ablt2_desc = abl[abilitie2]
+    #abl2_img = 'C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/Abilities/" + abilitie2 + ".png"
+    abilitie3 = abl["ABILITIETHREE"]
+    ablt3_desc = abl[abilitie3]
+    #abl3_img = 'C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/Abilities/" + abilitie3 + ".png"
+    abilitie4 = abl["ABILITIEFOUR"]
+    ablt4_desc = abl[abilitie4]
+    #abl4_img = 'C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/Abilities/" + abilitie4 + ".png"
+    mbd = discord.Embed(title=args1)
+    mbd.set_thumbnail(url= thbm)
+    mbd.set_image(url= img)
+    mbd.add_field(name = "Role", value = role)
+    mbd.add_field(name = "Description", value = desc)
+    mbd.add_field(name = abilitie1, value = ablt1_desc)
+    mbd.add_field(name = abilitie2, value = ablt2_desc)
+    mbd.add_field(name = abilitie3, value = ablt3_desc)
+    mbd.add_field(name = "ULT : " + abilitie4, value = ablt4_desc)
+    return mbd
 
 @client.event
 async def on_ready():
@@ -135,58 +183,19 @@ async def on_message(message:discord.Message):
     args[0] = args[0][1::]
     print(args)
     if args[0] == "Agent" :
-        with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/desc.json") as d:
-            descr = json.load(d)
-        img = descr["IMG"]
-        desc = descr["DESC"]
-        role = descr["ROLE"]
-        with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Roles/data.json') as c:
-            rolesdata = json.load(c)
-        thbm = rolesdata[role]
-        with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/Abilities/abilities.json") as d:
-            abl = json.load(d)
-        abilitie1 = abl["ABILITIEONE"]
-        ablt1_desc = abl[abilitie1]
-        #abl1_img = 'C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/Abilities/" + abilitie1 + ".png"
-        abilitie2 = abl["ABILITIETWO"]
-        ablt2_desc = abl[abilitie2]
-        #abl2_img = 'C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/Abilities/" + abilitie2 + ".png"
-        abilitie3 = abl["ABILITIETHREE"]
-        ablt3_desc = abl[abilitie3]
-        #abl3_img = 'C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/Abilities/" + abilitie3 + ".png"
-        abilitie4 = abl["ABILITIEFOUR"]
-        ablt4_desc = abl[abilitie4]
-        #abl4_img = 'C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args[1] + "/Abilities/" + abilitie4 + ".png"
-        mbd = discord.Embed(title=args[1])
-        mbd.set_thumbnail(url= thbm)
-        mbd.set_image(url= img)
-        mbd.add_field(name = "Role", value = role)
-        mbd.add_field(name = "Description", value = desc)
-        mbd.add_field(name = abilitie1, value = ablt1_desc)
-        mbd.add_field(name = abilitie2, value = ablt2_desc)
-        mbd.add_field(name = abilitie3, value = ablt3_desc)
-        mbd.add_field(name = "ULT : " + abilitie4, value = ablt4_desc)
-        await message.channel.send(embed=mbd) 
+        mbdAgent = GetAgent(args1=args[1])
+        await message.channel.send(embed=mbdAgent) 
     
     if args[0] == "Map" :
-        with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Maps/'+ args[2] + "/data.json") as x:
-            descr2 = json.load(x)
-        graph = descr2["GRAPH"]
-        desc2 = descr2["DESC"]
-        persp = descr2["PERSP"]
-        mbd2 = discord.Embed(title=args[1])
-        mbd2.add_field(name = "Description", value = desc2)
-        if args[1] == "Graph" :
-            mbd2.set_image(url= graph)
-        if args[1] == "Persp" :
-            mbd2.set_image(url= persp)
-        await message.channel.send(embed=mbd2) 
+        mbdMap = GetMap(args1= args[1], args2= args[2])
+        await message.channel.send(embed=mbdMap) 
         
     if args[0] == "Last-Update" :
         await message.channel.send("Last Update : " + LASTUPDATE)
     
     if args[0] == "Help" :
-        await message.channel.send(embed=mbdhelp)
+        mbdHelp = GetHelp()
+        await message.channel.send(embed=mbdHelp)
 
     if args[0] == 'Stats' :
         await message.channel.send('Hang on while we searching for : ' + args[1])
@@ -213,8 +222,46 @@ async def on_message(message:discord.Message):
             action_row2 = ActionRow(buttonUrlG)
             await message.channel.send(embed=mbdstats, components=[action_row2]) #components=mbdstats)
 
-#@bot.slash_command(name ="helpDd", description="Get commands and usage help :D", scope= scope)
-#async def help(interaction: discord.Interaction):
-#    await interaction.channel.send(embed=mbdhelp, ephemeral=True)
+#@client.slash_command(name ="help", description="Get commands and usage help :D")
+#async def help(message:discord.SlashCommand):
+    mbd = GetHelp()
+    await message.channel.send(embed=mbd)
+
+@client.slash_command(name ="last-update", description="Get last updated episode for this bot (VALORANT)")
+async def help(message:discord.SlashCommand):
+    await message.channel.send("Last Update : " + LASTUPDATE)
+
+#@client.slash_command(name ="help", description="Get your ranked stats :D", options = [
+#        interactions.Option(
+#            name="ID",
+#            description="Your ID",
+#            type=discord.OptionType.,
+#            required=True,
+#        ),
+#    ],)
+#async def help(message:discord.SlashCommand, name):
+#    await message.channel.send('Hang on while we searching for : ' + name)
+#    mbdstats = GetStats(args=name)
+#    argsCOR = str(name).replace('#', '%23')
+#    if mbdstats == True :
+#        buttonUrl = Button(
+#                style=ButtonStyle.url,
+#                label="Sign in",
+#                url='https://tracker.gg/valorant/profile/riot/' + argsCOR,
+#                )
+#        action_row = ActionRow(buttonUrl)
+#        await message.channel.send('Your profile is private :(, or you have never logged in with tracker.gg, try :', components=[action_row])
+#        
+#    if mbdstats == "norank" :
+#        await message.channel.send('You have never played ranked before :(')
+#        #await message.channel.send('Sign in here to get your stats and use this bot : https://tracker.gg/valorant/profile/riot/' + argsCOR)
+#    else :
+#        buttonUrlG = Button(
+#                style=ButtonStyle.url,
+#                label="Check more Details :D",
+#                url='https://tracker.gg/valorant/profile/riot/' + argsCOR,
+#                )
+#        action_row2 = ActionRow(buttonUrlG)
+#        await message.channel.send(embed=mbdstats, components=[action_row2])
 
 client.run(TOKEN)
