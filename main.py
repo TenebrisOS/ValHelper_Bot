@@ -231,6 +231,11 @@ async def on_message(message:discord.Message):
 async def help(message:discord.SlashCommand):
     await message.channel.send("Last Update : " + LASTUPDATE)
 
+@client.slash_command(name ="help", description="Get usage and commands help :D")
+async def help(message:discord.SlashCommand):
+    mbdhelp = GetHelp()
+    await message.channel.send(embed=mbdhelp)
+
 #@client.slash_command(name ="help", description="Get your ranked stats :D", options = [
 #        interactions.Option(
 #            name="ID",
