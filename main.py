@@ -91,7 +91,6 @@ def GetStats(args) :
             hsPourc = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[3]/div[3]/div/div[2]/span[2]')
             mbd_stats.add_field(name = 'HS / % :', value = hsPourc.text)
             KDRatio = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[3]/div[2]/div/div[2]/span[2]')
-            rankImg = driver.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[3]/div/main/div[3]/div[3]/div[2]/div[2]/div[1]/div[1]/div[2]/div[2]/div/div[1]/img')
             imgUrl = rankImg.get_attribute("src")
             mbd_stats.set_thumbnail(url= imgUrl)
             mbd_stats.add_field(name = 'HD Ratio :', value = KDRatio.text)
