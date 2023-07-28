@@ -14,12 +14,12 @@ from selenium.webdriver.support.wait import WebDriverWait
 from pyvirtualdisplay import Display 
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
-from discord import ButtonStyle, ActionRow, Button, SlashCommand
+from discord import ButtonStyle, ActionRow, Button
 import os
 from discord.ext import commands
 from discord import Color 
 
-with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/config.json') as f:
+with open('C:/Users/Samy Lamlih/Documents/py/ValHelper_Bot/config.json') as f:
    data = json.load(f)
 
 # region variables 
@@ -41,7 +41,7 @@ driver = webdriver.Chrome(options=options)
 #endregion 
 
 def GetMap(args1, args2):
-    with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Maps/'+ args2 + "/data.json") as x:
+    with open('C:/Users/Samy Lamlih/Documents/py/ValHelper_Bot/Github/Files/Maps/'+ args2 + "/data.json") as x:
             descr2 = json.load(x)
     graph = descr2["GRAPH"]
     desc2 = descr2["DESC"]
@@ -132,15 +132,15 @@ def GetHelp():
     return mbdhelp
 
 def GetAgent(args1):
-    with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args1 + "/desc.json") as d:
+    with open('C:/Users/Samy Lamlih/Documents/py/ValHelper_Bot/Github/Files/Agents/'+ args1 + "/desc.json") as d:
             descr = json.load(d)
     img = descr["IMG"]
     desc = descr["DESC"]
     role = descr["ROLE"]
-    with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Roles/data.json') as c:
+    with open('C:/Users/Samy Lamlih/Documents/py/ValHelper_Bot/Github/Files/Roles/data.json') as c:
         rolesdata = json.load(c)
     thbm = rolesdata[role]
-    with open('C:/Users/modib/Documents/kali/py/ValHelper_Bot/Github/Files/Agents/'+ args1 + "/Abilities/abilities.json") as d:
+    with open('C:/Users/Samy Lamlih/Documents/py/ValHelper_Bot/Github/Files/Agents/'+ args1 + "/Abilities/abilities.json") as d:
         abl = json.load(d)
     abilitie1 = abl["ABILITIEONE"]
     ablt1_desc = abl[abilitie1]
@@ -226,14 +226,14 @@ async def on_message(message:discord.Message):
     mbd = GetHelp()
     await message.channel.send(embed=mbd)
 
-@client.slash_command(name ="last-update", description="Get last updated episode for this bot (VALORANT)")
-async def help(message:discord.SlashCommand):
-    await message.channel.send("Last Update : " + LASTUPDATE)
-
-@client.slash_command(name ="help", description="Get usage and commands help :D")
-async def help(message:discord.SlashCommand):
-    mbdhelp = GetHelp()
-    await message.channel.send(embed=mbdhelp)
+#@client.slash_command(name ="last-update", description="Get last updated episode for this bot (VALORANT)")
+#async def help(message:discord.SlashCommand):
+#    await message.channel.send("Last Update : " + LASTUPDATE)
+#
+#@client.slash_command(name ="help", description="Get usage and commands help :D")
+#async def help(message:discord.SlashCommand):
+#    mbdhelp = GetHelp()
+#    await message.channel.send(embed=mbdhelp)
 
 #@client.slash_command(name ="help", description="Get your ranked stats :D", options = [
 #        interactions.Option(
