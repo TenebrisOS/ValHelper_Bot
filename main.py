@@ -3,7 +3,6 @@ import time
 import json
 import io
 #from discord import app_commands
-import interactions
 #from discord.ext import commands
 #from discord_slash import commands, SlashCommand, SlashContext
 import asyncio
@@ -11,7 +10,6 @@ import selenium
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
-from pyvirtualdisplay import Display 
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
 from discord import ButtonStyle, ActionRow, Button
